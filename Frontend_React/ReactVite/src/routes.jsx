@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Directly import components
 import App from "./App";
-import Adashboard  from "./components/Adashboard";
+import Adashboard  from "./components/ADashboard";
 import VehiclesPage from "./components/VehiclesPage";
 import RegistrationForm from "./userComponents/RegistrationForm";
 import AboutUs from "./userComponents/AboutUs";
@@ -19,6 +18,7 @@ import ContactUs from "./userComponents/ContactUs";
 import Claim from "./userComponents/Claim";
 import ForgotPassword from "./userComponents/ForgotPassword";
 import Image from "./userComponents/Image";
+import HealthCheck from "./components/HealthCheck";
 
 const AppRoutes = () => {
   return (
@@ -41,6 +41,7 @@ const AppRoutes = () => {
         <Route path="/contactus" element={<ContactUs />} />
         <Route path="/forgot" element={<ForgotPassword />} />
         <Route path="/image" element={<Image />} />
+        <Route path="/info" element={<HealthCheck /> } />
       </Routes>
     </Router>
   );

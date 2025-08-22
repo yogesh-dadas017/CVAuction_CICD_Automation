@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      SA_PASSWORD: "admin123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+      - ./db:/db-scripts             
+      - ./db/init-db.sh:/init-db.sh  
+    networks:
+      - networkName
+    entrypoint: ["bash", "-c", "chmod +x /init-db.sh && /init-db.sh"]
+
+  backend:
+    build: ./MsDotnetBackend/Solution1/
+    ports:
+      - "5087:80"
+    networks:
+      - networkName
+    depends_on:
+      - sqlserver
+    environment:
+      - ConnectionStrings__conStr=Server=sqlserver;Database=cvauction;User Id=sa;Password=admin123;
+
+
+  frontend:
+    build: ./Frontend_React/ReactVite
+    ports:
+      - "5173:80"
+    networks:
+      - networkName
+    depends_on:
+      - backend
+  
+volumes:
+  sqlserverdata:  
+
+networks:
+  networkName:
+    driver: bridge

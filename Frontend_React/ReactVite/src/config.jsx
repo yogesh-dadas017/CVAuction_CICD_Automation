@@ -1,6 +1,7 @@
+const isLocalhost = window.location.hostname === 'localhost';
 
 const config = {
-    // API_URL:'https://localhost:44358/api',
-    API_URL:'http://ec2-3-110-47-95.ap-south-1.compute.amazonaws.com:5000/api'
+  API_URL: isLocalhost ? 'http://localhost:5087/api' : 'http://backend/api',
 };
+
 export default config;

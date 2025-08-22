@@ -12,9 +12,16 @@ namespace CV_Auction099.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<string>> GetBids(int id)
+        public async Task<ActionResult<string>> GetBids()
         {
             return Ok("API Working ...");
+        }
+
+        [HttpGet("/api/con")]
+        public async Task<ActionResult<string>> GetConnection()
+        {
+            Console.WriteLine("Request incoming from frontend..");
+            return Ok("Connection Working with backed ...");
         }
     }
 }
